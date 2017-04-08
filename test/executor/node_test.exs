@@ -32,16 +32,16 @@ defmodule Executor.Test.Node do
     console.log("hello world")
     [1, 2, 3]
     """
-    {:ok, result} = code 
-    |> Node.run 
+    {:ok, result} = code
+    |> Node.run
     assert result == "hello world\n" <>
                      "[ 1, 2, 3 ]"
   end
 
   test "should handle and return errors" do
     code = "{{bad::object}}"
-    {:ok,  result} = code 
-    |> Node.run 
+    {:ok,  result} = code
+    |> Node.run
     assert result == "SyntaxError: Unexpected token :"
   end
 end

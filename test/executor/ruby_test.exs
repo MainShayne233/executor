@@ -4,7 +4,7 @@ defmodule Executor.Test.Ruby do
 
   test "should return valid result for ruby code" do
     code = "1 + 1"
-    {:ok, result} = code 
+    {:ok, result} = code
     |> Ruby.run
     assert result == "=> 2"
   end
@@ -15,7 +15,7 @@ defmodule Executor.Test.Ruby do
     puts "hello world"
     [1, 2, 3]
     """
-    {:ok, result} = code 
+    {:ok, result} = code
     |> Ruby.run
     assert result == "hello world\n" <>
                      "=> [1, 2, 3]"
@@ -33,7 +33,7 @@ defmodule Executor.Test.Ruby do
     dog = Dog.new
     dog.bark
     """
-    {:ok, result} = code 
+    {:ok, result} = code
     |> Ruby.run
     assert result == "woof!\n" <>
                      "=> nil"
@@ -43,14 +43,14 @@ defmodule Executor.Test.Ruby do
     code = """
     0 / 0
     """
-    {:ok, result} = code 
+    {:ok, result} = code
     |> Ruby.run
     assert result == "ZeroDivisionError: divided by 0"
 
     code = """
     {"wrong" <= "way"}
     """
-    {:ok, result} = code 
+    {:ok, result} = code
     |> Ruby.run
     assert result == "SyntaxError: (eval):2: syntax error, unexpected '}', " <>
                      "expecting =>"

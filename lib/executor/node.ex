@@ -10,9 +10,9 @@ defmodule Executor.Node do
   def run(code) do
     with {:ok, result} <- Shared.run("node", sanitize(code)) do
       {
-        :ok, 
-        result |> 
-        Util.String.remove_trailing_new_line
+        :ok,
+        result
+        |> Util.String.remove_trailing_new_line
       }
     end
   end
