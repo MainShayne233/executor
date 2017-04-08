@@ -1,5 +1,5 @@
-defmodule Executor.Runner.Ruby do
-  alias Executor.Runner.Shared
+defmodule Executor.Ruby do
+  alias Executor.Shared
 
   @moduledoc """
   This module is responsible for executing ruby code.

@@ -1,10 +1,10 @@
-defmodule Executor.Runner do
-  alias Executor.Utils
+defmodule Executor do
+  alias Executor.Util
   @moduledoc """
   This module is responsible for routing code to the appropriate language module
   """
 
-  def run(%{language: language, code: code}) do
+  def run(language, code) do
     with {:ok, language_module} <- module_for(language) do
       code
       |> language_module.run
@@ -13,8 +13,8 @@ defmodule Executor.Runner do
 
   def module_for(language) do
     module = [
-      "Elixir.Executor.Runner.",
-      language |> Utils.String.titleize,
+      "Elixir.Executor.",
+      language |> Util.String.titleize,
     ]
     |> Enum.join
     |> String.to_existing_atom

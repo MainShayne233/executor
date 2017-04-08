@@ -1,11 +1,11 @@
 defmodule Executor.Test.Ruby do
   use ExUnit.Case
-  use Maru.Test, for: Executor.Router
-  alias Executor.Test.Support.Helpers.Request
+  alias Executor.Ruby
 
   test "should return valid result for ruby code" do
-    {:ok, %{"result" => result}} = %{language: "ruby", code: "1 + 1"}
-    |> Request.post_and_respond("/run")
+    code = "1 + 1"
+    {:ok, result} = code 
+    |> Ruby.run
     assert result == "=> 2"
   end
 
@@ -15,8 +15,8 @@ defmodule Executor.Test.Ruby do
     puts "hello world"
     [1, 2, 3]
     """
-    {:ok, %{"result" => result}} = %{language: "ruby", code: code}
-    |> Request.post_and_respond("/run")
+    {:ok, result} = code 
+    |> Ruby.run
     assert result == "hello world\n" <>
                      "=> [1, 2, 3]"
   end
@@ -33,8 +33,8 @@ defmodule Executor.Test.Ruby do
     dog = Dog.new
     dog.bark
     """
-    {:ok, %{"result" => result}} = %{language: "ruby", code: code}
-    |> Request.post_and_respond("/run")
+    {:ok, result} = code 
+    |> Ruby.run
     assert result == "woof!\n" <>
                      "=> nil"
   end
@@ -43,16 +43,16 @@ defmodule Executor.Test.Ruby do
     code = """
     0 / 0
     """
-    {:ok, %{"result" => result}} = %{language: "ruby", code: code}
-    |> Request.post_and_respond("/run")
+    {:ok, result} = code 
+    |> Ruby.run
     assert result == "ZeroDivisionError: divided by 0"
 
     code = """
     {"wrong" <= "way"}
     """
-    {:ok, %{"result" => result}} = %{language: "ruby", code: code}
-    |> Request.post_and_respond("/run")
-    assert result == "SyntaxError: (eval):2: syntax error, unexpected '}'," <>
+    {:ok, result} = code 
+    |> Ruby.run
+    assert result == "SyntaxError: (eval):2: syntax error, unexpected '}', " <>
                      "expecting =>"
 
   end

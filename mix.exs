@@ -18,7 +18,6 @@ defmodule Executor.Mixfile do
     [
       {:credo, "~> 0.7", only: [:dev, :test]},
       {:dogma,  "~> 0.1", only: :dev},
-      {:maru,  "~> 0.11.4"},
     ]
   end
 end

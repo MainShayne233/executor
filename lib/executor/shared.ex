@@ -1,5 +1,4 @@
-defmodule Executor.Runner.Shared do
-  alias Executor.Runner
+defmodule Executor.Shared do
 
   @moduledoc """
   This contains shared execution code that is 
@@ -22,7 +21,7 @@ defmodule Executor.Runner.Shared do
 
   def create_file(language, code) do
     language_module = language
-    |> Runner.module_for
+    |> Executor.module_for
     |> elem(1)
     file_name = language_module.new_file_name()
     file_name

@@ -1,5 +1,5 @@
-defmodule Executor.Runner.Node do
-  alias Executor.Runner.Shared
+defmodule Executor.Node do
+  alias Executor.{Shared, Util}
 
   @moduledoc """
   This module is responsible for executing node code.
@@ -9,7 +9,11 @@ defmodule Executor.Runner.Node do
 
   def run(code) do
     with {:ok, result} <- Shared.run("node", sanitize(code)) do
-      {:ok, result |> remove_new_line}
+      {
+        :ok, 
+        result |> 
+        Util.String.remove_trailing_new_line
+      }
     end
   end
 
@@ -30,16 +34,5 @@ defmodule Executor.Runner.Node do
       console.log(e.name + ': ' + e.message)
     }
     """
-  end
-
-  def remove_new_line(result) do
-    result
-    |> String.reverse
-    |> String.codepoints
-    |> List.first
-    |> case do
-      "\n" -> result |> String.slice(0..-2)
-      _    -> result
-    end
   end
 end
