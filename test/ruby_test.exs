@@ -52,7 +52,8 @@ defmodule Executor.Test.Ruby do
     """
     {:ok, %{"result" => result}} = %{language: "ruby", code: code}
     |> Request.post_and_respond("/run")
-    assert result == "SyntaxError: (eval):2: syntax error, unexpected '}', expecting =>"
+    assert result == "SyntaxError: (eval):2: syntax error, unexpected '}'," <>
+                     "expecting =>"
 
   end
 end

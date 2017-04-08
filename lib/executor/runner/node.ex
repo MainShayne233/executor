@@ -7,7 +7,7 @@ defmodule Executor.Runner.Node do
   console.log() return, and the return value is the final value
   """
 
-  def run(code) do 
+  def run(code) do
     with {:ok, result} <- Shared.run("node", sanitize(code)) do
       {:ok, result |> remove_new_line}
     end
@@ -18,7 +18,6 @@ defmodule Executor.Runner.Node do
     |> String.split("\n")
     |> Enum.join(";")
   end
-
 
   def new_file_name, do: "./exe/node_run_#{:os.system_time}.js"
 

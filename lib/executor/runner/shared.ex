@@ -27,8 +27,8 @@ defmodule Executor.Runner.Shared do
     file_name = language_module.new_file_name()
     file_name
     |> File.write!(
-      code 
-      |> sanitize_code 
+      code
+      |> sanitize_code
       |> language_module.code_template
     )
     file_name

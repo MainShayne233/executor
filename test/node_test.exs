@@ -5,7 +5,7 @@ defmodule Executor.Test.Node do
 
   test "should return result for valid nodejs code" do
     {:ok, %{"result" => result}} = %{language: "node", code: "1 + 1"}
-    |> Request.post_and_respond("/run") 
+    |> Request.post_and_respond("/run")
     assert result == "2"
   end
 
@@ -22,27 +22,26 @@ defmodule Executor.Test.Node do
     dog.bark()
     """
     {:ok, %{"result" => result}} = %{language: "node", code: code}
-    |> Request.post_and_respond("/run") 
+    |> Request.post_and_respond("/run")
     assert result == "woof\n" <>
                      "undefined"
   end
- 
+
   test "should return result with console.log" do
     code = """
     console.log("hello world")
     [1, 2, 3]
     """
     {:ok, %{"result" => result}} = %{language: "node", code: code}
-    |> Request.post_and_respond("/run") 
+    |> Request.post_and_respond("/run")
     assert result == "hello world\n" <>
                      "[ 1, 2, 3 ]"
   end
- 
+
   test "should handle and return errors" do
     code = "{{bad::object}}"
     {:ok, %{"result" => result}} = %{language: "node", code: code}
-    |> Request.post_and_respond("/run") 
+    |> Request.post_and_respond("/run")
     assert result == "SyntaxError: Unexpected token :"
   end
- 
 end
