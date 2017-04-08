@@ -7,6 +7,7 @@ The ideal case for this app is to have it deployed in a Docker container where i
 
 ## Currently Supported Languages
 - ruby
+- node (any Javascript that Node can run)
 
 ## Usage
 
