@@ -51,4 +51,8 @@ iex(6)> Executor.Node.run "{hi::there"
 {:ok, "SyntaxError: Unexpected token :"}
 iex(7)> Executor.Node.run "console.log('hello world'); [1,2,3]"
 {:ok, "hello world\n[ 1, 2, 3 ]"}
+
+# pass language as argument
+iex(8)> Executor.run "ruby", "[1,2,3].map{|i| 2 * i}"
+{:ok, "=> [2, 4, 6]"}
 ```
