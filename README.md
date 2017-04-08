@@ -1,19 +1,49 @@
 # Executor
 
-**TODO: Add description**
+This is a [Maru] based REST API app that you can run and send requests to to execute raw code.
 
-## Installation
+Cuttently supported languaged:
+- ruby
 
-If [available in Hex](https://hex.pm/docs/publish), the package can be installed
-by adding `executor` to your list of dependencies in `mix.exs`:
+## Usage
 
-```elixir
-def deps do
-  [{:executor, "~> 0.1.0"}]
-end
+Make sure that you have whatever language you want to use
+installed/available on the machine you will be running this on.
+
+```bash
+git clone https://github.com/MainShayne233/executor
+cd executor
+iex mix deps.get
+iex -S mix
 ```
 
-Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_doc)
-and published on [HexDocs](https://hexdocs.pm). Once published, the docs can
-be found at [https://hexdocs.pm/executor](https://hexdocs.pm/executor).
+Then you can send requests to [localhost:8888]
 
+To use different port:
+```bash
+PORT=9000 iex -S mix
+```
+
+
+## Requests
+
+Current routes:
+- /run
+
+### /run
+sample curl request:
+
+```bash
+curl -H "Content-Type: application/json" -X POST  -d '{
+  "language": "ruby",
+  "code": "[1,2,3].map {|i| 2 * i}"
+
+}' 'localhost:8888/run'
+
+# response
+{"result":"=> [2, 4, 6]"}
+
+```
+
+[Maru]: (https://maru.readme.io/docs)
+[localhost:8888]: (http://localhost:8888)
