@@ -44,7 +44,9 @@ defmodule Executor.Runner.Ruby do
       return_val = eval "\n#{code}\n"
       print "=> \#{return_val || 'nil'}"
     rescue Exception => e
-      print e
+      print e.class
+      print ': '
+      print e.message
     end
     """
   end
