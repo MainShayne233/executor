@@ -1,6 +1,6 @@
 # Executor
 
-This is a [Maru] based REST API app that you can run and send requests to to execute raw code.
+This is a [Maru] based REST API app that you can run and use to execute raw code.
 
 ## Warning: This app executes code dangerously, use with caution
 The ideal case for this app is to have it deployed in a Docker container where it can do little to no harm.
