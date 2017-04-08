@@ -1,8 +1,16 @@
 defmodule Executor.Runner.Ruby do
 
+  @moduledoc """
+  This module is responsible for executing ruby code.
+  The response should be identical to that of irb, where
+  print/put statements are returned, and the actual return value
+  is preceaded by '=>'
+  """
+
   def run(code) do
     file_name = create_file(code)
-    System.cmd("ruby", [file_name])
+    "ruby"
+    |> System.cmd([file_name])
     |> case do
       {result, 0} ->
         File.rm(file_name)
@@ -23,9 +31,10 @@ defmodule Executor.Runner.Ruby do
   def new_file_name, do: "./exe/ruby_run_#{:os.system_time}.rb"
 
   def sanitize_code(code) do
-    code = code 
+    code = code
     |> String.replace(~s("), ~s(\\"))
-    Regex.replace(~r/\#{(.*?)}/, code, "\#{\\1}")
+    ~r/\#{(.*?)}/
+    |> Regex.replace(code, "\#{\\1}")
     |> String.replace(~s(\#{), ~s(\\\#{))
   end
 
@@ -39,5 +48,4 @@ defmodule Executor.Runner.Ruby do
     end
     """
   end
-
 end

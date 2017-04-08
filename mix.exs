@@ -16,7 +16,8 @@ defmodule Executor.Mixfile do
 
   defp deps do
     [
-      {:maru, "~> 0.11.4"},
+      {:maru,  "~> 0.11.4"},
+      {:dogma, "~> 0.1", only: :dev},
     ]
   end
 end

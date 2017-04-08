@@ -1,4 +1,10 @@
 defmodule Executor.Router do
+  @moduledoc """
+  This is the router module.
+  It uses Maru to route an incoming request to the correct module and
+  responds with the appropriate JSON.
+  As of now, the only module to be routed to is Executor.Runner.
+  """
   use Maru.Router
   alias Executor.Runner
 
@@ -18,11 +24,9 @@ defmodule Executor.Router do
       params
       |> Runner.run
       |> case do
-        {:ok, result} -> conn |> json(%{result: result})
+        {:ok,   result} -> conn |> json(%{result: result})
         {:error, error} -> conn |> json(%{error: error})
       end
     end
   end
-
 end
-

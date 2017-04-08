@@ -35,8 +35,7 @@ defmodule Executor.Test do
     """
     {:ok, %{"result" => result}} = %{language: "ruby", code: code}
     |> Request.post_and_respond("/run")
-    assert result == "woof!\n" <> 
+    assert result == "woof!\n" <>
                      "=> nil"
   end
 end
-
