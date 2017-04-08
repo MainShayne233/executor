@@ -40,7 +40,8 @@ defmodule Executor.Test.Elixir do
     """
     {:ok, result} = code
     |> Executor.Elixir.run
-    assert result == "** (ArithmeticError) bad argument in arithmetic expression"
+    assert result == "** (ArithmeticError) " <>
+                     "bad argument in arithmetic expression"
 
     code = """
     %{"wrong" <= "way"}
