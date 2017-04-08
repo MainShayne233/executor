@@ -13,7 +13,6 @@ defmodule Executor.Router do
     json_decoder: Poison,
     parsers: [:urlencoded, :json, :multipart]
 
-
   namespace :run do
     params do
       requires :language, type: String

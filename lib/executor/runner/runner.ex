@@ -12,17 +12,15 @@ defmodule Executor.Runner do
   end
 
   def module_for(language) do
-    try do
-      module = [
-        "Elixir.Executor.Runner.",
-        language |> Utils.String.titleize,
-      ]
-      |> Enum.join
-      |> String.to_existing_atom
-      {:ok, module}
-    rescue
-      _ -> {:error, "Can't run #{language} code"}
-    end
+    module = [
+      "Elixir.Executor.Runner.",
+      language |> Utils.String.titleize,
+    ]
+    |> Enum.join
+    |> String.to_existing_atom
+    {:ok, module}
+  rescue
+    _ -> {:error, "Can't run #{language} code"}
   end
 
 end

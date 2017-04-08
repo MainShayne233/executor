@@ -24,7 +24,7 @@ defmodule Executor.Runner.Ruby do
   def create_file(code) do
     file_name = new_file_name()
     file_name
-    |> File.write!( code |> sanitize_code |> code_template )
+    |> File.write!(code |> sanitize_code |> code_template)
     file_name
   end
 

@@ -1,5 +1,7 @@
-%{"cowboy": {:hex, :cowboy, "1.1.2", "61ac29ea970389a88eca5a65601460162d370a70018afe6f949a29dca91f3bb0", [:rebar3], [{:cowlib, "~> 1.0.2", [hex: :cowlib, optional: false]}, {:ranch, "~> 1.3.2", [hex: :ranch, optional: false]}]},
+%{"bunt": {:hex, :bunt, "0.2.0", "951c6e801e8b1d2cbe58ebbd3e616a869061ddadcc4863d0a2182541acae9a38", [:mix], []},
+  "cowboy": {:hex, :cowboy, "1.1.2", "61ac29ea970389a88eca5a65601460162d370a70018afe6f949a29dca91f3bb0", [:rebar3], [{:cowlib, "~> 1.0.2", [hex: :cowlib, optional: false]}, {:ranch, "~> 1.3.2", [hex: :ranch, optional: false]}]},
   "cowlib": {:hex, :cowlib, "1.0.2", "9d769a1d062c9c3ac753096f868ca121e2730b9a377de23dec0f7e08b1df84ee", [:make], []},
+  "credo": {:hex, :credo, "0.7.2", "850463f126c09227994967fdcf8b8ad7684ab220f7727c00bcafc0ac37bd3660", [:mix], [{:bunt, "~> 0.2.0", [hex: :bunt, optional: false]}]},
   "dogma": {:hex, :dogma, "0.1.14", "561abecb25a2408738e7d2bc34cc565a07e6fadbc4fb91b2cbb35a5a9234cf1c", [:mix], [{:poison, ">= 2.0.0", [hex: :poison, optional: false]}]},
   "maru": {:hex, :maru, "0.11.4", "35f4a0ab0eab5247f6b5b74bba30fcb63c575ea3157afb3dac0b6804b94a2a86", [:mix], [{:cowboy, "~> 1.0", [hex: :cowboy, optional: false]}, {:plug, "~> 1.0", [hex: :plug, optional: false]}, {:poison, "~> 1.5 or ~> 2.0 or ~> 3.0", [hex: :poison, optional: false]}]},
   "mime": {:hex, :mime, "1.1.0", "01c1d6f4083d8aa5c7b8c246ade95139620ef8effb009edde934e0ec3b28090a", [:mix], []},
