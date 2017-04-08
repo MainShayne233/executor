@@ -12,7 +12,7 @@ defmodule Executor.Node do
       {
         :ok,
         result
-        |> Util.String.remove_trailing_new_line
+        |> Util.String.remove_trailing_new_line,
       }
     end
   end
