@@ -32,8 +32,9 @@ defmodule Executor.Mixfile do
 
   defp deps do
     [
-      {:credo, "~> 0.7", only: [:dev, :test]},
+      {:credo,  "~> 0.7", only: [:dev, :test]},
       {:dogma,  "~> 0.1", only: :dev},
+      {:ex_doc, ">= 0.0.0", only: :dev},
     ]
   end
 end
