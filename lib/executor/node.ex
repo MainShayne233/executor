@@ -1,26 +1,35 @@
 defmodule Executor.Node do
-  alias Executor.Shared
+  alias Executor.{Shared, Util}
 
   @moduledoc """
   This module is responsible for executing node code.
   """
 
+  @doc """
+  Returns the result map for the given Node code
+
+    iex> run("console.log('i kind of like that it does this'); 1 / 0")
+    {:ok, %{return: "Infinity", stdout: "i kind of like that it does this"}}
+  """
+
   def run(code) do
-    with {:ok, result} <- Shared.run("node", sanitize(code)) do
-      {
-        :ok,
-        result
-      }
-    end
+    Shared.run(
+      code |> Util.String.semicolonize,
+      "node"
+    )
   end
 
-  defp sanitize(code) do
-    code
-    |> String.split("\n")
-    |> Enum.join(";")
-  end
+  @doc """
+  Returns Node specific name for temporary script file
+  """
 
   def new_file_name, do: "./exe/node_run_#{:os.system_time}.js"
+
+  @doc """
+  Generates the script to execute Node code.
+  Code is rescued on error
+  Deliminators are placed in to aid in capturing results
+  """
 
   def code_template(code) do
     """

@@ -82,6 +82,6 @@ iex(11)> Executor.Elixir.run "IO.puts \"hello world\""
 {:ok, %{return: ":ok", stdout: "hello world"}}
 
 # pass language as argument
-iex(12)> Executor.run "ruby", "1 + 1"                 
+iex(12)> Executor.run "1 + 1", "ruby"
 {:ok, %{return: "2", stdout: ""}}
 ```

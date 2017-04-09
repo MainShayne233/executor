@@ -5,16 +5,28 @@ defmodule Executor.Elixir do
   This module is responsible for executing elixir code.
   """
 
-  def run(code) do
-    with {:ok, result} <- Shared.run("elixir", code) do
-      {
-        :ok,
-        result,
-      }
-    end
-  end
+  @doc """
+  Returns result map for the given Elixir code
+
+    iex> run("%{not: :me} |> Map.get_lazy(:but, fn -> :this end)")
+    {:ok, %{return: ":this", stdout: ""}}
+  """
+
+  def run(code), do: Shared.run(code, "elixir")
+
+  @doc """
+  Returns Elixir specific file name for temporary script
+  """
 
   def new_file_name, do: "./exe/elixir_run_#{:os.system_time}.exs"
+
+
+  @doc """
+  Generates the script to execute Elixir code.
+  Code is rescued on error
+  Deliminators are placed in to aid in capturing results
+  """
+
 
   def code_template(code) do
     """

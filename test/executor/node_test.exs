@@ -1,6 +1,8 @@
 defmodule Executor.Test.Node do
   use ExUnit.Case
   alias Executor.Node
+  import Node
+  doctest Node
 
   @moduledoc """
   Tests the Node module

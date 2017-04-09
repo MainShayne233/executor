@@ -1,6 +1,8 @@
 defmodule Executor.Test.Ruby do
   use ExUnit.Case
   alias Executor.Ruby
+  import Ruby
+  doctest Ruby
 
   @moduledoc """
   Tests the Ruby module

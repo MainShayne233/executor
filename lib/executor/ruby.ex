@@ -5,9 +5,26 @@ defmodule Executor.Ruby do
   This module is responsible for executing ruby code.
   """
 
-  def run(code), do: Shared.run("ruby", code)
+  @doc """
+  Returns result map for the given code
+
+    iex> run("puts 'ayyy'; 2**3")
+    {:ok, %{return: "8", stdout: "ayyy"}}
+  """
+
+  def run(code), do: Shared.run(code, "ruby")
+
+  @doc """
+  Returns Ruby specific file name for temporary script
+  """
 
   def new_file_name, do: "./exe/ruby_run_#{:os.system_time}.rb"
+
+  @doc """
+  Generates the script to execute Ruby code.
+  Code is rescued on error
+  Deliminators are placed in to aid in capturing results
+  """
 
   def code_template(code) do
     """

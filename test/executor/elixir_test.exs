@@ -1,5 +1,7 @@
 defmodule Executor.Test.Elixir do
   use ExUnit.Case
+  import Executor.Elixir
+  doctest Executor.Elixir
 
   @elixir_module Executor.Elixir
 

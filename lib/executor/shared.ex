@@ -6,7 +6,21 @@ defmodule Executor.Shared do
   valid for numerous languages
   """
 
-  def run(language, code) do
+  @doc """
+  Returns result map for given language and code
+
+    iex> run("[1,2,3].size", "elixir")
+    {:error, 
+      %{
+        error_message: "invalid call [1, 2, 3].size()", 
+        error_type: "CompileError", 
+        return: nil, 
+        stdout: ""
+      }
+    }
+  """
+
+  def run(code, language) do
     file_name = create_file(language, code)
     language
     |> System.cmd([file_name])
