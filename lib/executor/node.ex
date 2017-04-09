@@ -23,7 +23,7 @@ defmodule Executor.Node do
   Returns Node specific name for temporary script file
   """
 
-  def new_file_name, do: "./exe/node_run_#{:os.system_time}.js"
+  def new_file_name, do: "node_run_#{:os.system_time}.js"
 
   @doc """
   Generates the script to execute Node code.

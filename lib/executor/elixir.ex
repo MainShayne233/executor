@@ -18,7 +18,7 @@ defmodule Executor.Elixir do
   Returns Elixir specific file name for temporary script
   """
 
-  def new_file_name, do: "./exe/elixir_run_#{:os.system_time}.exs"
+  def new_file_name, do: "elixir_run_#{:os.system_time}.exs"
 
   @doc """
   Generates the script to execute Elixir code.

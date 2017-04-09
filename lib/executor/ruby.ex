@@ -18,7 +18,7 @@ defmodule Executor.Ruby do
   Returns Ruby specific file name for temporary script
   """
 
-  def new_file_name, do: "./exe/ruby_run_#{:os.system_time}.rb"
+  def new_file_name, do: "ruby_run_#{:os.system_time}.rb"
 
   @doc """
   Generates the script to execute Ruby code.
