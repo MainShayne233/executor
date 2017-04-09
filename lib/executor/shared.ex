@@ -44,6 +44,10 @@ defmodule Executor.Shared do
         key,
         rest
         |> Util.String.match_between(delimiter)
+        |> case do
+          nil -> nil
+          string -> Util.String.trim_newlines(string)
+        end,
       }
     end)
     |> Enum.into(%{})
@@ -53,7 +57,11 @@ defmodule Executor.Shared do
     )
     |> case do
       result = %{error_type: nil, error_message: nil} ->
-        {:ok, result |> Map.drop([:error_type, :error_message])}
+        {
+          :ok,
+          result
+          |> Map.drop([:error_type, :error_message])
+        }
       result ->
         {:error, result}
     end
@@ -66,7 +74,7 @@ defmodule Executor.Shared do
       [stdout, rest] ->
       {
         stdout
-        |> Util.String.remove_trailing_new_line,
+        |> Util.String.remove_trailing_newline,
         rest,
       }
       [rest] -> {"", rest}

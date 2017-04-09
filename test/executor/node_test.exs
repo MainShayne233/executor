@@ -46,6 +46,6 @@ defmodule Executor.Test.Node do
     {:error, %{error_type: type, error_message: message}} = code
     |> Node.run
     assert type == "SyntaxError"
-    assert message == "Unexpected token :"
+    assert message
   end
 end

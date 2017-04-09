@@ -25,14 +25,14 @@ defmodule Executor.Util.String do
   Return the string with trailing newline removed if one
   existed
 
-    iex> remove_trailing_new_line("apple\\n")
+    iex> remove_trailing_newline("apple\\n")
     "apple"
 
-    iex> remove_trailing_new_line("apple")
+    iex> remove_trailing_newline("apple")
     "apple"
   """
 
-  def remove_trailing_new_line(result) do
+  def remove_trailing_newline(result) do
     result
     |> String.reverse
     |> String.codepoints
@@ -41,6 +41,50 @@ defmodule Executor.Util.String do
       "\n" -> result |> String.slice(0..-2)
       _    -> result
     end
+  end
+
+  @doc """
+  Return the string with preceading newline removed if one
+  existed
+
+    iex> remove_preceading_newline("\\napple")
+    "apple"
+
+    iex> remove_preceading_newline("apple")
+    "apple"
+  """
+
+  def remove_preceading_newline(result) do
+    result
+    |> String.codepoints
+    |> List.first
+    |> case do
+      "\n" -> result |> String.slice(1..-1)
+      _    -> result
+    end
+  end
+
+
+  @doc """
+  Returns string with newlines removes from beginning of end
+
+    iex> trim_newlines("\\napple\\n")
+    "apple"
+
+    iex> trim_newlines("apple\\n")
+    "apple"
+
+    iex> trim_newlines("\\napple")
+    "apple"
+
+    iex> trim_newlines("apple")
+    "apple"
+  """
+
+  def trim_newlines(string) do
+    string
+    |> remove_trailing_newline
+    |> remove_preceading_newline
   end
 
   @doc """
@@ -54,10 +98,12 @@ defmodule Executor.Util.String do
   """
 
   def match_between(string, delimiter) do
-    ~r/#{delimiter}\n?(.*)\n?#{delimiter}/
-    |> Regex.scan(string)
-    |> List.flatten
-    |> List.last
+    string
+    |> String.split(delimiter)
+    |> case do
+      [_, match, _] -> match
+      _             -> nil
+    end
   end
 
   @doc """
