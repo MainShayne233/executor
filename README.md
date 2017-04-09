@@ -6,6 +6,7 @@ Executes your code, REPL style.
 The ideal case for this app is to have it deployed in a Docker container with an exposed API where it can do little to no harm.
 
 ## Currently Supported Languages
+- elixir
 - ruby
 - node (any Javascript that Node can run)
 
