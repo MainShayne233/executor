@@ -5,31 +5,31 @@ otp_release:
   - 18.2.1
 before_script:
 
-before_script: echo "en_US.UTF-8 UTF-8" > /etc/locale.gen \
-               && apt-get update -qqy \
-               && apt-get install -qqy \
-                    unzip \
-                    locales \
-                    git-core \
-                    curl \
-                    zlib1g-dev \
-                    build-essential \
-                    libssl-dev \
-                    libreadline-dev \
-                    libyaml-dev \
-                    libsqlite3-dev \
-                    sqlite3 \
-                    libxml2-dev \
-                    libxslt1-dev \
-                    libcurl4-openssl-dev \
-                    python-software-properties \
-                    libffi-dev \
-                    nodejs \
-                    wget \
-               && rm -rf /var/lib/apt/lists/* \
-               && wget http://ftp.ruby-lang.org/pub/ruby/2.3/ruby-2.3.3.tar.gz \
-               && tar -xzvf ruby-2.3.3.tar.gz \
-               && cd ruby-2.3.3/ \
-               && ./configure \
-               && make \
-               && make install
+before_install: sudo echo "en_US.UTF-8 UTF-8" > /etc/locale.gen \
+                && sudo apt-get update -qqy \
+                && sudo apt-get install -qqy \
+                     unzip \
+                     locales \
+                     git-core \
+                     curl \
+                     zlib1g-dev \
+                     build-essential \
+                     libssl-dev \
+                     libreadline-dev \
+                     libyaml-dev \
+                     libsqlite3-dev \
+                     sqlite3 \
+                     libxml2-dev \
+                     libxslt1-dev \
+                     libcurl4-openssl-dev \
+                     python-software-properties \
+                     libffi-dev \
+                     nodejs \
+                     wget \
+                && sudo rm -rf /var/lib/apt/lists/* \
+                && sudo wget http://ftp.ruby-lang.org/pub/ruby/2.3/ruby-2.3.3.tar.gz \
+                && sudo tar -xzvf ruby-2.3.3.tar.gz \
+                && sudo cd ruby-2.3.3/ \
+                && sudo ./configure \
+                && sudo make \
+                && sudo make install
