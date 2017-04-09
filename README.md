@@ -38,21 +38,44 @@ Example in IEx:
 ```elixir
 # ruby
 iex(2)> Executor.Ruby.run "1 + 1"
-{:ok, "=> 2"} # notice this reflects the output from using irb (the Ruby REPL)
-iex(3)> Executor.Ruby.run "0 / 0"
-{:ok, "ZeroDivisionError: divided by 0"}
-iex(4)> Executor.Ruby.run "puts 'hello world'; [1,2,3]"
-{:ok, "hello world\n=> [1, 2, 3]"}
+{:ok, %{return: "2", stdout: ""}}
+
+iex(2)> Executor.Ruby.run "[].upcase"
+{:error,
+ %{error_message: "undefined method `upcase' for []:Array",
+   error_type: "NoMethodError", return: nil, stdout: ""}}
+
+iex(3)> Executor.Ruby.run "puts 'hello'; [1,2,3]"
+{:ok, %{return: "[1, 2, 3]", stdout: "hello"}}
 
 # node
-iex(5)> Executor.Node.run "1 + 1"
-{:ok, "2"}
-iex(6)> Executor.Node.run "{hi::there"
-{:ok, "SyntaxError: Unexpected token :"}
-iex(7)> Executor.Node.run "console.log('hello world'); [1,2,3]"
-{:ok, "hello world\n[ 1, 2, 3 ]"}
+iex(4)> Executor.Node.run "1 + 1"
+{:ok, %{return: "2", stdout: ""}}
+
+iex(5)> Executor.Node.run "1 / 0"
+{:ok, %{return: "Infinity", stdout: ""}}
+
+iex(6)> Executor.Node.run "apple.juice()"
+{:error,
+ %{error_message: "apple is not defined", error_type: "ReferenceError",
+   return: nil, stdout: ""}}
+iex(7)> Executor.Node.run "console.log('hello world')"        
+
+{:ok, %{return: "undefined", stdout: "hello world"}}
+
+# elixir
+iex(9)> Executor.Elixir.run "1 + 1"
+{:ok, %{return: "2", stdout: ""}}
+
+iex(10)> Executor.Elixir.run "0 / 0"
+{:error,
+ %{error_message: "bad argument in arithmetic expression",
+   error_type: "ArithmeticError", return: nil, stdout: ""}}
+
+iex(11)> Executor.Elixir.run "IO.puts \"hello world\""
+{:ok, %{return: ":ok", stdout: "hello world"}}
 
 # pass language as argument
-iex(8)> Executor.run "ruby", "[1,2,3].map{|i| 2 * i}"
-{:ok, "=> [2, 4, 6]"}
+iex(12)> Executor.run "ruby", "1 + 1"                 
+{:ok, %{return: "2", stdout: ""}}
 ```

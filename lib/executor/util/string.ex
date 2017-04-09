@@ -20,4 +20,11 @@ defmodule Executor.Util.String do
       _    -> result
     end
   end
+
+  def match_between(delimiter, string) do
+    ~r/#{delimiter}\n?(.*)\n?#{delimiter}/
+    |> Regex.scan(string)
+    |> List.flatten
+    |> List.last
+  end
 end

@@ -2,14 +2,15 @@ defmodule Executor.Test do
   use ExUnit.Case
 
   test "run/2 should route to the correct module" do
-    code = "1 + 1"
-    {:ok, result} = "ruby"
+    code = "1 / 0"
+    {:error, %{error_type: type, error_message: message}} = "ruby"
     |> Executor.run(code)
-    assert result == "=> 2"
+    assert type == "ZeroDivisionError"
+    assert message == "divided by 0"
 
-    {:ok, result} = "node"
+    {:ok, %{return: return}} = "node"
     |> Executor.run(code)
-    assert result == "2"
+    assert return == "Infinity"
   end
 
 end

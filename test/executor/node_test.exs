@@ -4,9 +4,10 @@ defmodule Executor.Test.Node do
 
   test "should return result for valid nodejs code" do
     code = "1 + 1"
-    {:ok, result} = code
+    {:ok, %{return: return, stdout: stdout}} = code
     |> Node.run
-    assert result == "2"
+    assert return == "2"
+    assert stdout == ""
   end
 
   test "should be able to define classes" do
@@ -21,10 +22,10 @@ defmodule Executor.Test.Node do
     const dog = new Dog
     dog.bark()
     """
-    {:ok, result} = code
+    {:ok, %{return: return, stdout: stdout}} = code
     |> Node.run
-    assert result == "woof\n" <>
-                     "undefined"
+    assert return == "undefined"
+    assert stdout == "woof"
   end
 
   test "should return result with console.log" do
@@ -32,16 +33,17 @@ defmodule Executor.Test.Node do
     console.log("hello world")
     [1, 2, 3]
     """
-    {:ok, result} = code
+    {:ok, %{return: return, stdout: stdout}} = code
     |> Node.run
-    assert result == "hello world\n" <>
-                     "[ 1, 2, 3 ]"
+    assert return == "[ 1, 2, 3 ]"
+    assert stdout == "hello world"
   end
 
   test "should handle and return errors" do
     code = "{{bad::object}}"
-    {:ok,  result} = code
+    {:error, %{error_type: type, error_message: message}} = code
     |> Node.run
-    assert result == "SyntaxError: Unexpected token :"
+    assert type == "SyntaxError"
+    assert message == "Unexpected token :"
   end
 end

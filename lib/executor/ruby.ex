@@ -16,11 +16,17 @@ defmodule Executor.Ruby do
     """
     begin
       return_val = eval "\n#{code}\n"
-      print "=> \#{return_val || 'nil'}"
+      puts "#{Shared.std_out_terminated_indicator()}"
+      print "#{Shared.return_indicator()}"
+      print "\#{return_val || 'nil'}"
+      print "#{Shared.return_indicator()}"
     rescue Exception => e
-      print e.class
-      print ': '
-      print e.message
+      print "#{Shared.error_type_indicator}"
+      print "\#{e.class}"
+      print "#{Shared.error_type_indicator}"
+      print "#{Shared.error_message_indicator}"
+      print "\#{e.message}"
+      print "#{Shared.error_message_indicator}"
     end
     """
   end

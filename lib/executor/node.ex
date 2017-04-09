@@ -1,10 +1,8 @@
 defmodule Executor.Node do
-  alias Executor.{Shared, Util}
+  alias Executor.Shared
 
   @moduledoc """
   This module is responsible for executing node code.
-  The response should be identical to that of the node repl/cli, where
-  console.log() return, and the return value is the final value
   """
 
   def run(code) do
@@ -12,7 +10,6 @@ defmodule Executor.Node do
       {
         :ok,
         result
-        |> Util.String.remove_trailing_new_line,
       }
     end
   end
@@ -29,9 +26,17 @@ defmodule Executor.Node do
     """
     try {
       return_value = eval("#{code}")
+      process.stdout.write("#{Shared.std_out_terminated_indicator()}")
+      process.stdout.write("#{Shared.return_indicator()}")
       console.log(return_value)
+      process.stdout.write("#{Shared.return_indicator()}")
     } catch(e) {
-      console.log(e.name + ': ' + e.message)
+      process.stdout.write("#{Shared.error_type_indicator()}")
+      process.stdout.write(e.name)
+      process.stdout.write("#{Shared.error_type_indicator()}")
+      process.stdout.write("#{Shared.error_message_indicator()}")
+      process.stdout.write(e.message)
+      process.stdout.write("#{Shared.error_message_indicator()}")
     }
     """
   end

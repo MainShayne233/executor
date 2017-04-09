@@ -1,4 +1,5 @@
 defmodule Executor.Shared do
+  alias Executor.Util
 
   @moduledoc """
   This contains shared execution code that is 
@@ -12,10 +13,52 @@ defmodule Executor.Shared do
     |> case do
       {result, 0} ->
         File.rm(file_name)
-        {:ok, result}
+        parse_result(result)
       {_, 1} ->
         File.rm(file_name)
         {:error, "Error when executing code"}
+    end
+  end
+
+  def parse_result(result) do
+    {stdout, rest} = result
+    |> parse_stdout
+    [
+      {:return, return_indicator()},
+      {:error_type, error_type_indicator()},
+      {:error_message, error_message_indicator()},
+    ]
+    |> Enum.map(fn {key, delimiter} ->
+      {
+        key,
+        delimiter
+        |> Util.String.match_between(rest)
+      }
+    end)
+    |> Enum.into(%{})
+    |> Map.put(
+      :stdout,
+      stdout
+    )
+    |> case do
+      result = %{error_type: nil, error_message: nil} ->
+        {:ok, result |> Map.drop([:error_type, :error_message])}
+      result ->
+        {:error, result}
+    end
+  end
+
+  def parse_stdout(result) do
+    result
+    |> String.split(std_out_terminated_indicator())
+    |> case do
+      [stdout, rest] ->
+      {
+        stdout
+        |> Util.String.remove_trailing_new_line,
+        rest,
+      }
+      [rest] -> {"", rest}
     end
   end
 
@@ -41,5 +84,10 @@ defmodule Executor.Shared do
     |> String.replace(~s(\#{), ~s(\\\#{))
   end
 
+  def std_out_terminated_indicator, do: "________STDOUT________"
+
+  def return_indicator, do: "-_-_-_-_RETURN_-_-_-_-"
+  def error_type_indicator, do: "-_-_-_-_ERROR_TYPE_-_-_-_-"
+  def error_message_indicator, do: "-_-_-_-_ERROR_MESSAGE_-_-_-_-"
 
 end

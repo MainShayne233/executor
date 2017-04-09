@@ -3,21 +3,21 @@ defmodule Executor.Test.Elixir do
 
   test "should return valid result for elixir code" do
     code = "1 + 1"
-    {:ok, result} = code
+    {:ok, %{return: return, stdout: stdout}} = code
     |> Executor.Elixir.run
-    assert result == "2"
+    assert return == "2"
+    assert stdout == ""
   end
-
 
   test "should show print/put statements in results" do
     code = """
     IO.puts "hello world"
     [1, 2, 3]
     """
-    {:ok, result} = code
+    {:ok, %{return: return, stdout: stdout}} = code
     |> Executor.Elixir.run
-    assert result == "hello world\n" <>
-                     "[1, 2, 3]"
+    assert return == "[1, 2, 3]"
+    assert stdout == "hello world"
   end
 
   test "can define modules" do
@@ -28,27 +28,27 @@ defmodule Executor.Test.Elixir do
 
     Dog.bark()
     """
-    {:ok, result} = code
+    {:ok, %{return: return, stdout: stdout}} = code
     |> Executor.Elixir.run
-    assert result == "woof!\n" <>
-                     ":ok"
+    assert return == ":ok"
+    assert stdout == "woof!"
   end
 
   test "should handle and return errors" do
     code = """
     0 / 0
     """
-    {:ok, result} = code
+    {:error, %{error_type: type, error_message: message}} = code
     |> Executor.Elixir.run
-    assert result == "** (ArithmeticError) " <>
-                     "bad argument in arithmetic expression"
+    assert type == "ArithmeticError"
+    assert message == "bad argument in arithmetic expression"
 
     code = """
     %{"wrong" <= "way"}
     """
-    {:ok, result} = code
+    {:error, %{error_type: type, error_message: message}} = code
     |> Executor.Elixir.run
-    assert result == "** (SyntaxError) syntax error before: '}'"
-
+    assert type == "SyntaxError"
+    assert message == "syntax error before: '}'"
   end
 end

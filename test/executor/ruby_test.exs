@@ -4,21 +4,21 @@ defmodule Executor.Test.Ruby do
 
   test "should return valid result for ruby code" do
     code = "1 + 1"
-    {:ok, result} = code
+    {:ok, %{return: return, stdout: stdout}} = code
     |> Ruby.run
-    assert result == "=> 2"
+    assert return == "2"
+    assert stdout == ""
   end
-
 
   test "should show print/put statements in results" do
     code = """
     puts "hello world"
     [1, 2, 3]
     """
-    {:ok, result} = code
+    {:ok, %{return: return, stdout: stdout}} = code
     |> Ruby.run
-    assert result == "hello world\n" <>
-                     "=> [1, 2, 3]"
+    assert return == "[1, 2, 3]"
+    assert stdout == "hello world"
   end
 
   test "can define classes" do
@@ -33,27 +33,27 @@ defmodule Executor.Test.Ruby do
     dog = Dog.new
     dog.bark
     """
-    {:ok, result} = code
+    {:ok, %{return: return, stdout: stdout}} = code
     |> Ruby.run
-    assert result == "woof!\n" <>
-                     "=> nil"
+    assert return == "nil"
+    assert stdout == "woof!"
   end
 
   test "should handle and return errors" do
     code = """
     0 / 0
     """
-    {:ok, result} = code
+    {:error, %{error_type: type, error_message: message}} = code
     |> Ruby.run
-    assert result == "ZeroDivisionError: divided by 0"
+    assert type == "ZeroDivisionError"
+    assert message == "divided by 0"
 
     code = """
     {"wrong" <= "way"}
     """
-    {:ok, result} = code
+    {:error, %{error_type: type, error_message: message}} = code
     |> Ruby.run
-    assert result == "SyntaxError: (eval):2: syntax error, unexpected '}', " <>
-                     "expecting =>"
-
+    assert type == "SyntaxError"
+    assert message == "(eval):2: syntax error, unexpected '}', expecting =>"
   end
 end
