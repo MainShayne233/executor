@@ -54,6 +54,9 @@ defmodule Executor.Test.Ruby do
     {:error, %{error_type: type, error_message: message}} = code
     |> Ruby.run
     assert type == "SyntaxError"
-    assert message == "(eval):2: syntax error, unexpected '}', expecting =>"
+    assert message in [
+      "(eval):2: syntax error, unexpected '}', expecting =>",
+      "(eval):2: syntax error, unexpected '}', expecting tASSOC",
+    ]
   end
 end
