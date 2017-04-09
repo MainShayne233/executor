@@ -5,6 +5,7 @@ Executes your code, REPL style.
 [![Build Status](https://travis-ci.org/MainShayne233/executor.svg?branch=master)](https://travis-ci.org/MainShayne233/executor)
 [![Coverage Status](https://coveralls.io/repos/github/MainShayne233/executor/badge.svg?branch=master)](https://coveralls.io/github/MainShayne233/executor?branch=master)
 [![Code Climate](https://codeclimate.com/github/MainShayne233/executor/badges/gpa.svg)](https://codeclimate.com/github/MainShayne233/executor)
+[![Hex Version](http://img.shields.io/hexpm/v/executor.svg?style=flat)](https://hex.pm/packages/executor)
 
 ## Warning: This app executes code dangerously, use with caution
 The ideal case for this app is to have it deployed in a Docker container with an exposed API where it can do little to no harm.
@@ -24,7 +25,7 @@ Add executor to you dependencies in `mix.exs`
 ```elixir
 defp deps do
   [
-    {:executor, git: "https://github.com/MainShayne233/executor.git"},
+    {:executor, "~> 0.0.1"},
   ]
 end
 
