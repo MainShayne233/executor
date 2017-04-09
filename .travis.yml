@@ -1,6 +1,16 @@
 language: elixir
+
 elixir:
   - 1.4.0
+
 otp_release:
   - 18.2.1
+
+addons:
+  code_climate:
+    repo_token: 617510bb8df4de9188cc191799aeb2faaf81ddae2fe6204a267b4879f4346be7
+
+after_success:
+  - npm install -g codeclimate-test-reporter
+  - codeclimate-test-reporter < lcov.info
 

@@ -14,9 +14,6 @@ defmodule Executor.Shared do
       {result, 0} ->
         File.rm(file_name)
         parse_result(result)
-      {_, 1} ->
-        File.rm(file_name)
-        {:error, "Error when executing code"}
     end
   end
 

@@ -13,4 +13,11 @@ defmodule Executor.Test do
     assert return == "Infinity"
   end
 
+  test "run/2 should return error for unsupported language" do
+    code = "1 / 0"
+    {:error, error} = "java"
+    |> Executor.run(code)
+    assert error == "Can't run java code"
+  end
+
 end
