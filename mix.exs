@@ -24,7 +24,7 @@ defmodule Executor.Mixfile do
 
   defp package do
     [
-      licences: ["MIT"],
+      licenses: ["MIT"],
       maintainers: ["MainShayne233"],
       links: %{github: "https://github.com/MainShayne233/executor"},
     ]
