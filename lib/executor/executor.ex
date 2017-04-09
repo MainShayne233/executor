@@ -40,5 +40,4 @@ defmodule Executor do
   rescue
     _ -> {:error, "Can't run #{language} code"}
   end
-
 end

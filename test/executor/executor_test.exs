@@ -25,5 +25,4 @@ defmodule Executor.Test do
     |> run("java")
     assert error == "Can't run java code"
   end
-
 end

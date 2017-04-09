@@ -20,13 +20,11 @@ defmodule Executor.Elixir do
 
   def new_file_name, do: "./exe/elixir_run_#{:os.system_time}.exs"
 
-
   @doc """
   Generates the script to execute Elixir code.
   Code is rescued on error
   Deliminators are placed in to aid in capturing results
   """
-
 
   def code_template(code) do
     """
