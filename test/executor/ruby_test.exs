@@ -28,7 +28,7 @@ defmodule Executor.Test.Ruby do
   test "can define classes" do
     code = """
     class Dog
-      
+
       def bark
         puts "woof!"
       end

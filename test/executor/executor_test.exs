@@ -1,6 +1,10 @@
 defmodule Executor.Test do
   use ExUnit.Case
 
+  @moduledoc """
+  Tests the general Executor module
+  """
+
   test "run/2 should route to the correct module" do
     code = "1 / 0"
     {:error, %{error_type: type, error_message: message}} = "ruby"
