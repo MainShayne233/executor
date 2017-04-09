@@ -3,6 +3,7 @@
 Executes your code, REPL style.
 
 [![Build Status](https://travis-ci.org/MainShayne233/executor.svg?branch=master)](https://travis-ci.org/MainShayne233/executor)
+[![Coverage Status](https://coveralls.io/repos/github/MainShayne233/executor/badge.svg?branch=master)](https://coveralls.io/github/MainShayne233/executor?branch=master)
 
 ## Warning: This app executes code dangerously, use with caution
 The ideal case for this app is to have it deployed in a Docker container with an exposed API where it can do little to no harm.
