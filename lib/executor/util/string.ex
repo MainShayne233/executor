@@ -46,14 +46,14 @@ defmodule Executor.Util.String do
   @doc """
   Returns the string found between two instances of the delimiter
 
-    iex> match_between("apple", "applejuiceapple")
+    iex> match_between("applejuiceapple", "apple")
     "juice"
 
-    iex> match_between("orange", "applejuiceapple")
+    iex> match_between("applejuiceapple", "orange")
     nil
   """
 
-  def match_between(delimiter, string) do
+  def match_between(string, delimiter) do
     ~r/#{delimiter}\n?(.*)\n?#{delimiter}/
     |> Regex.scan(string)
     |> List.flatten

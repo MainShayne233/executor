@@ -42,8 +42,8 @@ defmodule Executor.Shared do
     |> Enum.map(fn {key, delimiter} ->
       {
         key,
-        delimiter
-        |> Util.String.match_between(rest)
+        rest
+        |> Util.String.match_between(delimiter)
       }
     end)
     |> Enum.into(%{})
