@@ -17,7 +17,7 @@ defmodule Executor.Shared do
     end
   end
 
-  def parse_result(result) do
+  defp parse_result(result) do
     {stdout, rest} = result
     |> parse_stdout
     [
@@ -45,7 +45,7 @@ defmodule Executor.Shared do
     end
   end
 
-  def parse_stdout(result) do
+  defp parse_stdout(result) do
     result
     |> String.split(stdout_terminated_indicator())
     |> case do
@@ -59,7 +59,7 @@ defmodule Executor.Shared do
     end
   end
 
-  def create_file(language, code) do
+  defp create_file(language, code) do
     language_module = language
     |> Executor.module_for
     |> elem(1)
@@ -73,7 +73,7 @@ defmodule Executor.Shared do
     file_name
   end
 
-  def sanitize_code(code) do
+  defp sanitize_code(code) do
     code = code
     |> String.replace(~s("), ~s(\\"))
     ~r/\#{(.*?)}/

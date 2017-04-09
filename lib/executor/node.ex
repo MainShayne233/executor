@@ -14,7 +14,7 @@ defmodule Executor.Node do
     end
   end
 
-  def sanitize(code) do
+  defp sanitize(code) do
     code
     |> String.split("\n")
     |> Enum.join(";")
