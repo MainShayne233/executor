@@ -2,6 +2,10 @@ defmodule Executor.Test.Ruby do
   use ExUnit.Case
   alias Executor.Ruby
 
+  @moduledoc """
+  Tests the Ruby module
+  """
+
   test "should return valid result for ruby code" do
     code = "1 + 1"
     {:ok, %{return: return, stdout: stdout}} = code

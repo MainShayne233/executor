@@ -2,6 +2,10 @@ defmodule Executor.Test.Node do
   use ExUnit.Case
   alias Executor.Node
 
+  @moduledoc """
+  Tests the Node module
+  """
+
   test "should return result for valid nodejs code" do
     code = "1 + 1"
     {:ok, %{return: return, stdout: stdout}} = code

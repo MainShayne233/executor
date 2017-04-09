@@ -1,10 +1,16 @@
 defmodule Executor.Test.Elixir do
   use ExUnit.Case
 
+  @elixir_module Executor.Elixir
+
+  @moduledoc """
+  Tests for the Elixir module
+  """
+
   test "should return valid result for elixir code" do
     code = "1 + 1"
     {:ok, %{return: return, stdout: stdout}} = code
-    |> Executor.Elixir.run
+    |> @elixir_module.run
     assert return == "2"
     assert stdout == ""
   end
@@ -15,7 +21,7 @@ defmodule Executor.Test.Elixir do
     [1, 2, 3]
     """
     {:ok, %{return: return, stdout: stdout}} = code
-    |> Executor.Elixir.run
+    |> @elixir_module.run
     assert return == "[1, 2, 3]"
     assert stdout == "hello world"
   end
@@ -29,7 +35,7 @@ defmodule Executor.Test.Elixir do
     Dog.bark()
     """
     {:ok, %{return: return, stdout: stdout}} = code
-    |> Executor.Elixir.run
+    |> @elixir_module.run
     assert return == ":ok"
     assert stdout == "woof!"
   end
@@ -39,7 +45,7 @@ defmodule Executor.Test.Elixir do
     0 / 0
     """
     {:error, %{error_type: type, error_message: message}} = code
-    |> Executor.Elixir.run
+    |> @elixir_module.run
     assert type == "ArithmeticError"
     assert message == "bad argument in arithmetic expression"
 
@@ -47,7 +53,7 @@ defmodule Executor.Test.Elixir do
     %{"wrong" <= "way"}
     """
     {:error, %{error_type: type, error_message: message}} = code
-    |> Executor.Elixir.run
+    |> @elixir_module.run
     assert type == "SyntaxError"
     assert message == "syntax error before: '}'"
   end
