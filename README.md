@@ -25,7 +25,7 @@ Add executor to you dependencies in `mix.exs`
 ```elixir
 defp deps do
   [
-    {:executor, "~> 0.0.2"},
+    {:executor, "~> 0.0.3"},
   ]
 end
 
