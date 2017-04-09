@@ -10,11 +10,11 @@ defmodule Executor.Shared do
   Returns result map for given language and code
 
     iex> run("[1,2,3].size", "elixir")
-    {:error, 
+    {:error,
       %{
-        error_message: "invalid call [1, 2, 3].size()", 
-        error_type: "CompileError", 
-        return: nil, 
+        error_message: "invalid call [1, 2, 3].size()",
+        error_type: "CompileError",
+        return: nil,
         stdout: ""
       }
     }
