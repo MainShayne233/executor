@@ -10,22 +10,18 @@ defmodule Executor.Test.Node do
     assert stdout == ""
   end
 
-  test "should be able to define classes" do
+  test "should be able to define functions" do
     code = """
-    class Dog {
-      
-      bark() {
-        console.log('woof')
-      }
+    function dogBark() {
+      console.log('woof!')
     }
 
-    const dog = new Dog
-    dog.bark()
+    dogBark()
     """
     {:ok, %{return: return, stdout: stdout}} = code
     |> Node.run
     assert return == "undefined"
-    assert stdout == "woof"
+    assert stdout == "woof!"
   end
 
   test "should return result with console.log" do
