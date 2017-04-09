@@ -5,8 +5,7 @@ otp_release:
   - 18.2.1
 before_script:
 
-before_install: sudo echo "en_US.UTF-8 UTF-8" > /etc/locale.gen \
-                && sudo apt-get update -qqy \
+before_install: sudo apt-get update -qqy \
                 && sudo apt-get install -qqy \
                      unzip \
                      locales \
