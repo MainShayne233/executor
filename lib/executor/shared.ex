@@ -2,7 +2,7 @@ defmodule Executor.Shared do
   alias Executor.Util
 
   @moduledoc """
-  This contains shared execution code that is 
+  This contains shared execution code that is
   valid for numerous languages
   """
 
@@ -84,7 +84,7 @@ defmodule Executor.Shared do
     |> String.replace(~s(\#{), ~s(\\\#{))
   end
 
-  def std_out_terminated_indicator, do: "________STDOUT________"
+  def std_out_terminated_indicator, do: "-_-_-_-_STDOUT-_-_-_-_"
 
   def return_indicator, do: "-_-_-_-_RETURN_-_-_-_-"
   def error_type_indicator, do: "-_-_-_-_ERROR_TYPE_-_-_-_-"

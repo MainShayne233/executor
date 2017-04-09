@@ -3,9 +3,6 @@ defmodule Executor.Elixir do
 
   @moduledoc """
   This module is responsible for executing elixir code.
-  The response should be identical to that of IEx, where
-  IO.inspect/IO.puts statements are returned, and the actual return value
-  is the last value
   """
 
   def run(code) do

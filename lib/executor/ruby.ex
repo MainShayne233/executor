@@ -3,9 +3,6 @@ defmodule Executor.Ruby do
 
   @moduledoc """
   This module is responsible for executing ruby code.
-  The response should be identical to that of irb, where
-  print/put statements are returned, and the actual return value
-  is preceaded by '=>'
   """
 
   def run(code), do: Shared.run("ruby", code)
