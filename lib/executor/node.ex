@@ -26,7 +26,7 @@ defmodule Executor.Node do
     """
     try {
       return_value = eval("#{code}")
-      process.stdout.write("#{Shared.std_out_terminated_indicator()}")
+      process.stdout.write("#{Shared.stdout_terminated_indicator()}")
       process.stdout.write("#{Shared.return_indicator()}")
       console.log(return_value)
       process.stdout.write("#{Shared.return_indicator()}")

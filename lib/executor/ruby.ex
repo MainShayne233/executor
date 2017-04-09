@@ -13,7 +13,7 @@ defmodule Executor.Ruby do
     """
     begin
       return_val = eval "\n#{code}\n"
-      puts "#{Shared.std_out_terminated_indicator()}"
+      puts "#{Shared.stdout_terminated_indicator()}"
       print "#{Shared.return_indicator()}"
       print "\#{return_val || 'nil'}"
       print "#{Shared.return_indicator()}"

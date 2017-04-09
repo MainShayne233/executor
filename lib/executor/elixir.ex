@@ -20,7 +20,7 @@ defmodule Executor.Elixir do
     """
     try do
       return_val = Code.eval_string("#{code}")
-      IO.puts "#{Shared.std_out_terminated_indicator()}"
+      IO.puts "#{Shared.stdout_terminated_indicator()}"
       IO.puts "#{Shared.return_indicator()}"
       IO.inspect return_val |> elem(0)
       IO.puts "#{Shared.return_indicator()}"
