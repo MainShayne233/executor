@@ -5,8 +5,7 @@ otp_release:
   - 18.2.1
 before_script:
 
-before_install: sudo apt-get update -qqy \
-                && sudo apt-get install -qqy \
+before_install: sudo apt-get install -qqy \
                      unzip \
                      locales \
                      git-core \
