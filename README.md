@@ -65,8 +65,8 @@ iex(6)> Executor.Node.run "apple.juice()"
 {:error,
  %{error_message: "apple is not defined", error_type: "ReferenceError",
    return: nil, stdout: ""}}
+   
 iex(7)> Executor.Node.run "console.log('hello world')"        
-
 {:ok, %{return: "undefined", stdout: "hello world"}}
 
 # elixir
