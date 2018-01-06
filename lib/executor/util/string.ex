@@ -54,16 +54,8 @@ defmodule Executor.Util.String do
     "apple"
   """
 
-  def remove_preceading_newline(result) do
-    result
-    |> String.codepoints
-    |> List.first
-    |> case do
-      "\n" -> result |> String.slice(1..-1)
-      _    -> result
-    end
-  end
-
+  def remove_preceading_newline("\n" <> string), do: string
+  def remove_preceading_newline(string), do: string
 
   @doc """
   Returns string with newlines removes from beginning of end
